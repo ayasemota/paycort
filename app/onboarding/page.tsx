@@ -26,13 +26,12 @@ const INITIAL_FORM_STATE: FormData = { name: "", email: "", password: "" };
 
 export default function OnboardingPage() {
    const searchParams = useSearchParams();
-   const isLoginMode = (searchParams.get("mode") || "login") === "login";
-   const [authMode, setAuthMode] = useState(isLoginMode);
+   const modeFromUrl = (searchParams.get("mode") || "login") === "login";
+   const [authMode, setAuthMode] = useState(modeFromUrl);
    const [modalOpen, setModalOpen] = useState(false);
    const [form, setForm] = useState<FormData>(INITIAL_FORM_STATE);
    const inputRef = useRef<HTMLInputElement>(null);
 
-   useEffect(() => setAuthMode(isLoginMode), [isLoginMode]);
    useEffect(() => inputRef.current?.focus(), [authMode]);
 
    const updateForm = (e: React.ChangeEvent<HTMLInputElement>) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
