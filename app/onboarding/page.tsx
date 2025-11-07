@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
@@ -6,6 +7,8 @@ import Footer from "../components/Footer";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
+
+export const dynamic = "force-dynamic";
 
 export default function OnboardingPage() {
    const searchParams = useSearchParams();
@@ -34,13 +37,13 @@ export default function OnboardingPage() {
 
    const loginFields = [
       { name: "email", label: "Email Address", type: "email" },
-      { name: "password", label: "Password", type: "password" }
+      { name: "password", label: "Password", type: "password" },
    ];
 
    const signupFields = [
       { name: "name", label: "Full Name", type: "text" },
       { name: "email", label: "Email Address", type: "email" },
-      { name: "password", label: "Password", type: "password" }
+      { name: "password", label: "Password", type: "password" },
    ];
 
    const fields = isLogin ? loginFields : signupFields;
@@ -61,26 +64,30 @@ export default function OnboardingPage() {
                      ? "Log in to continue to your dashboard."
                      : "Sign up to start simplifying your taxes with Paycort."}
                </p>
-
                <div className="flex justify-center gap-6 mb-8 border-b border-gray-200 w-full">
                   {["login", "signup"].map((type) => (
                      <button
                         key={type}
                         onClick={() => setIsLogin(type === "login")}
                         className={`cursor-pointer pb-3 font-medium text-sm transition-all duration-300 ${(type === "login" && isLogin) || (type === "signup" && !isLogin)
-                           ? "text-green-200 border-b-2 border-green-200"
-                           : "text-gray-400 hover:text-gray-600"
+                              ? "text-green-200 border-b-2 border-green-200"
+                              : "text-gray-400 hover:text-gray-600"
                            }`}
                      >
                         {type === "login" ? "Log In" : "Sign Up"}
                      </button>
                   ))}
                </div>
-
-               <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 text-left">
+               <form
+                  onSubmit={handleSubmit}
+                  className="w-full flex flex-col gap-6 text-left"
+               >
                   {fields.map((field, idx) => (
                      <div key={field.name} className="flex flex-col gap-2">
-                        <label htmlFor={field.name} className="font-medium text-gray-800 text-sm">
+                        <label
+                           htmlFor={field.name}
+                           className="font-medium text-gray-800 text-sm"
+                        >
                            {field.label}
                         </label>
                         <input
@@ -101,7 +108,6 @@ export default function OnboardingPage() {
                      onClick={() => { }}
                   />
                </form>
-
                <p className="text-gray-600 text-sm mt-6">
                   {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
                   <button
