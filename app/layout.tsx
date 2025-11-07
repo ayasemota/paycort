@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins, Playfair_Display } from "next/font/google";
 import "./globals.css";
+import Preloader from "./components/preloader";
 
 const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "700"] });
 const playfair = Playfair_Display({ variable: "--font-play-fair-display", subsets: ["latin"] });
@@ -13,7 +14,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} ${playfair.variable} antialiased`}>{children}</body>
+      <body className={`${poppins.variable} ${playfair.variable} antialiased`}>
+        <Preloader />
+        {children}
+      </body>
     </html>
   );
 }
