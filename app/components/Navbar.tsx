@@ -21,7 +21,7 @@ export default function Navbar() {
             <Link href="/Works" className="hover:text-green-200 transition-colors duration-300">How it Works</Link>
          </div>
          <div className="flex gap-6">
-            <Link href="/onboarding?mode=signup" className="hidden md:flex"><Button text="Sign Up" border={true} /></Link>
+            <Link href="/onboarding?mode=signup" className="hidden sm:flex"><Button text="Sign Up" border={true} /></Link>
             <Link href="/onboarding?mode=login"><Button text="Log in" /></Link>
          </div>
       </nav>
