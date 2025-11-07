@@ -4,10 +4,27 @@
   --color-white: #fff;
   --color-black: #1b1b1b;
   --color-green-100: #008751;
-  --color-green-200: #0FA958;
+  --color-green-200: #0fa958;
   --font-poppins: var(--font-poppins);
 }
 
 body {
   font-family: Poppins, Helvetica, sans-serif;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+.animate-fadeOut {
+  animation: fadeOut 3s ease-in-out forwards;
 }

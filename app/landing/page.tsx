@@ -19,6 +19,13 @@ export default function LandingPage() {
       setFormData({ firstName: "", lastName: "", phone: "", email: "" });
    };
 
+   const scrollToWaitlist = () => {
+      const waitlistSection = document.getElementById("waitlist");
+      if (waitlistSection) {
+         waitlistSection.scrollIntoView({ behavior: "smooth" });
+      }
+   };
+
    const inputFields = [
       { name: "firstName", label: "First Name", type: "text" },
       { name: "lastName", label: "Last Name", type: "text" },
@@ -40,7 +47,7 @@ export default function LandingPage() {
             <div className="container px-6 py-16 flex flex-col gap-6 lg:items-center lg:text-center lg:justify-center">
                <h1 className="text-[36px] md:text-[52px] lg:max-w-[70%]">Understand Your Taxes. Before They <span className="text-green-100 italic">Understand</span> You.</h1>
                <p className="lg:max-w-[40%]">A smart AI tool that helps Nigerians see, track, and plan their taxes in real time powered by clarity, not confusion.</p>
-               <Button text="Join Early Access" href="/Waitlist" />
+               <div className="w-full"><Button text="Join Early Access" onClick={scrollToWaitlist} /></div>
             </div>
          </section>
          <section id="about" className="pt-[88px] px-6 container mx-auto">
@@ -54,7 +61,7 @@ export default function LandingPage() {
                </div>
             </div>
          </section>
-         <section className="py-[88px] px-6 container mx-auto flex items-center justify-center">
+         <section id="waitlist" className="py-[88px] px-6 container mx-auto flex items-center justify-center">
             <div className="max-w-[1200px] w-full bg-[#C8E6D7] rounded-2xl p-8 md:p-16">
                <h1 className="text-[32px] md:text-[42px] mb-12">Join the <span className="italic text-green-100">Waitlist</span> now!</h1>
                <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-8">
