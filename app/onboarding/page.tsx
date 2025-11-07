@@ -7,7 +7,7 @@ import Modal from "../components/Modal";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 
-export default function Onboarding() {
+export default function OnboardingPage() {
    const searchParams = useSearchParams();
    const mode = searchParams.get("mode") || "login";
    const [isLogin, setIsLogin] = useState(mode === "login");
@@ -76,7 +76,6 @@ export default function Onboarding() {
                      </button>
                   ))}
                </div>
-
 
                <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6 text-left">
                   {fields.map((field, idx) => (
