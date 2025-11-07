@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -24,7 +24,7 @@ const FORM_CONFIGS = {
 
 const INITIAL_FORM_STATE: FormData = { name: "", email: "", password: "" };
 
-export default function OnboardingPage() {
+function OnboardingContent() {
    const searchParams = useSearchParams();
    const modeFromUrl = (searchParams.get("mode") || "login") === "login";
    const [authMode, setAuthMode] = useState(modeFromUrl);
@@ -49,7 +49,6 @@ export default function OnboardingPage() {
 
    return (
       <>
-         <Navbar />
          <section className="min-h-[600px] flex items-center justify-center px-6 py-20 bg-[#EDFFF5]">
             <div className="max-w-[480px] w-full bg-white rounded-2xl shadow-lg border border-green-50 p-8 md:p-12 text-center flex flex-col items-center">
                <div className="mb-6"><Logo /></div>
@@ -72,8 +71,19 @@ export default function OnboardingPage() {
                <p className="text-gray-600 text-sm mt-6">{modeText.toggle} <button onClick={toggleMode} className="text-green-200 hover:text-green-100 font-medium underline hover:no-underline cursor-pointer underline-offset-2">{modeText.toggleLink}</button></p>
             </div>
          </section>
-         <Footer />
          <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} title={modeText.modalTitle} message={modeText.modalMessage} />
+      </>
+   );
+}
+
+export default function OnboardingPage() {
+   return (
+      <>
+         <Navbar />
+         <Suspense fallback={<div className="min-h-[600px] flex items-center justify-center bg-[#EDFFF5]"><p>Loading...</p></div>}>
+            <OnboardingContent />
+         </Suspense>
+         <Footer />
       </>
    );
 }
