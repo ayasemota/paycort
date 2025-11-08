@@ -48,7 +48,7 @@ function OnboardingContent() {
 
    return (
       <>
-         <section className="min-h-[600px] flex items-center justify-center px-6 py-20 bg-[#EDFFF5]">
+         <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-[#EDFFF5]">
             <div className="max-w-[480px] w-full bg-white rounded-2xl shadow-lg border border-green-50 p-8 md:p-12 text-center flex flex-col items-center">
                <h1 className="text-[28px] md:text-[24px] font-semibold mb-2">{modeText.title}</h1>
                <p className="text-gray-500 mb-8 text-sm">{modeText.subtitle}</p>
