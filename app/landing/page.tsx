@@ -50,7 +50,7 @@ export default function LandingPage() {
                <div className="w-full"><Button text="Join Early Access" onClick={scrollToWaitlist} /></div>
             </div>
          </section>
-         <section id="about" className="pt-[88px] px-6 container mx-auto">
+         <section id="about" className="pt-[88px] px-6 container mx-auto max-w-[1200px]">
             <div className="flex flex-col lg:flex-row gap-7">
                <div className="w-full lg:w-auto lg:shrink-0"><Image src={LogoSpat} alt="Logo Spat" className="w-full lg:w-auto lg:h-full object-contain" /></div>
                <div className="bg-[#EDFFF5] rounded-lg overflow-hidden flex-1 lg:relative py-8 lg:py-0">
@@ -64,11 +64,11 @@ export default function LandingPage() {
          <section id="waitlist" className="py-[88px] px-6 container mx-auto flex items-center justify-center">
             <div className="max-w-[1200px] w-full bg-[#C8E6D7] rounded-2xl p-8 md:p-16">
                <h1 className="text-[32px] md:text-[42px] mb-12">Join the <span className="italic text-green-100">Waitlist</span> now!</h1>
-               <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-8">
+               <form onSubmit={handleSubmit} className="grid w-full md:grid-cols-2 gap-8">
                   {inputFields.map((field) => (
                      <div key={field.name} className="flex flex-col gap-3">
                         <label className="font-medium text-black">{field.label}</label>
-                        <input type={field.type} name={field.name} placeholder={field.label} value={formData[field.name as keyof typeof formData]} onChange={handleChange} required className="py-4 px-6 rounded-lg border-2 border-green-100 focus:outline-none focus:border-green-200 transition-colors duration-300" />
+                        <input type={field.type} name={field.name} placeholder={field.label} value={formData[field.name as keyof typeof formData]} onChange={handleChange} required className="py-4 px-6 rounded-lg border-2 border-green-100 focus:outline-none focus:border-green-200 transition-colors duration-300 max-w-[90%] sm:max-w-full" />
                      </div>
                   ))}
                   <div className="md:col-span-2 mt-4">
