@@ -4,7 +4,7 @@ import "./globals.css";
 import Preloader from "./components/preloader";
 
 const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "700"] });
-const playfair = Playfair_Display({ variable: "--font-play-fair-display", subsets: ["latin"] });
+const playfair = Playfair_Display({ variable: "--font-play-fair-display", subsets: ["latin"], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Paycort | AI Tax Integration App",
