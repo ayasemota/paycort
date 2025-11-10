@@ -72,7 +72,7 @@ export default function LandingPage() {
          <section className="mx-auto min-h-[600px] flex flex-col items-center justify-center relative overflow-hidden" style={{ backgroundImage: "url(/banner-bg.png)", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}>
             <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10"></div>
             <div className="container px-6 py-16 flex flex-col gap-6 lg:items-center lg:text-center lg:justify-center relative z-10">
-               <h1 className="text-[36px] md:text-[52px] lg:max-w-[70%] animate-fadeInUp">Understand Your Taxes. Before They <span className="text-green-100 font-[family-name:var(--font-play-fair-display)]">Understand</span> You.</h1>
+               <h1 className="text-[36px] md:text-[52px] lg:max-w-[70%] animate-fadeInUp">Understand Your Taxes. Before They <span className="text-green-100 font-[family-name:var(--font-play-fair-display)] italic">Understand</span> You.</h1>
                <p className="lg:max-w-[40%] animate-fadeInUp stagger-1">A smart AI tool that helps Nigerians see, track, and plan their taxes in real time powered by clarity, not confusion.</p>
                <div className="w-full animate-fadeInUp stagger-2"><Button text="Join Early Access" onClick={scrollToWaitlist} /></div>
             </div>
@@ -88,7 +88,7 @@ export default function LandingPage() {
                </div>
             </div>
          </section>
-         <section id="works" ref={(el) => { sectionRefs.current["works"] = el; }} className={`my-[88px] py-10 px-6 bg-[#EDFFF5] scroll-mt-20 transition-all duration-1000 ${visibleSections.includes("works") ? "opacity-100" : "opacity-0"}`}>
+         <section id="works" ref={(el) => { sectionRefs.current["works"] = el; }} className={`mt-[88px] py-10 px-6 bg-[#EDFFF5] scroll-mt-20 transition-all duration-1000 ${visibleSections.includes("works") ? "opacity-100" : "opacity-0"}`}>
             <div className="container mx-auto max-w-[1200px]">
                <h2 className={`text-[32px] md:text-[42px] font-semibold text-center mb-4 transition-all duration-800 ${visibleSections.includes("works") ? "animate-fadeInUp" : ""}`}>How It Works</h2>
                <p className={`text-center text-gray-600 mb-12 max-w-[600px] mx-auto transition-all duration-800 ${visibleSections.includes("works") ? "animate-fadeInUp stagger-1" : ""}`}>Getting started with Paycort is simple. Follow these three easy steps to take control of your taxes.</p>
@@ -105,7 +105,7 @@ export default function LandingPage() {
          </section>
          <section id="waitlist" ref={(el) => { sectionRefs.current["waitlist"] = el; }} className={`py-[88px] px-6 container mx-auto flex items-center justify-center scroll-mt-20 transition-all duration-1000 ${visibleSections.includes("waitlist") ? "opacity-100 animate-fadeInUp" : "opacity-0"}`}>
             <div className="max-w-[1200px] w-full bg-[#C8E6D7] rounded-2xl p-8 md:p-16 hover:shadow-xl transition-shadow duration-300">
-               <h1 className="text-[32px] md:text-[42px] mb-12">Join the <span className="font-[family-name:var(--font-play-fair-display)] text-green-100">Waitlist</span> now!</h1>
+               <h1 className="text-[32px] md:text-[42px] mb-12">Join the <span className="text-green-100">Waitlist</span> now!</h1>
                <form onSubmit={handleSubmit} className="grid w-full md:grid-cols-2 gap-8">
                   {inputFields.map((field, index) => (
                      <div key={field.name} className={`flex flex-col gap-3 ${visibleSections.includes("waitlist") ? "animate-fadeInUp" : ""}`} style={{ animationDelay: `${index * 0.1}s` }}>
