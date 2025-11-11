@@ -15,7 +15,7 @@ export default function Navbar() {
    };
 
    return (
-      <nav className="py-6 px-8 flex items-center justify-between sticky top-0 bg-white/80 backdrop-blur-md border-b border-green-100/30 z-50 shadow-sm">
+      <nav className="py-6 px-8 flex items-center justify-between sticky top-0 bg-white/75 backdrop-blur-3xl border-b border-green-100/30 z-50 shadow-sm">
          <Link href="/"><Logo /></Link>
          <div className="hidden lg:flex gap-10">
             <Link href="/" className="hover:text-green-200 transition-colors duration-300">Home</Link>
