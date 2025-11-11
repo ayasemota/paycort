@@ -70,11 +70,17 @@ export default function LandingPage() {
       <>
          <Navbar />
          <section className="mx-auto min-h-[600px] flex flex-col items-center justify-center relative overflow-hidden" style={{ backgroundImage: "url(/banner-bg.png)", backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundPosition: "center" }}>
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white/10"></div>
+            <div className="absolute inset-0 bg-linear-to-b from-transparent to-white/10"></div>
             <div className="container px-6 py-16 flex flex-col gap-6 lg:items-center lg:text-center lg:justify-center relative z-10">
-               <h1 className="text-[36px] md:text-[52px] lg:max-w-[70%] animate-fadeInUp">Understand Your Taxes. Before They <span className="text-green-100 font-[family-name:var(--font-play-fair-display)] italic">Understand</span> You.</h1>
+               <h1 className="text-[36px] md:text-[52px] lg:max-w-[70%] animate-fadeInUp">Understand Your Taxes. Before They <span className="text-green-100 font-(family-name:--font-play-fair-display) italic">Understand</span> You.</h1>
                <p className="lg:max-w-[40%] animate-fadeInUp stagger-1">A smart AI tool that helps Nigerians see, track, and plan their taxes in real time powered by clarity, not confusion.</p>
                <div className="w-full animate-fadeInUp stagger-2"><Button text="Join Early Access" onClick={scrollToWaitlist} /></div>
+            </div>
+            <div className="hidden lg:block">
+               <div className="absolute top-18 right-24"><Image src="/money.svg" alt="Money Image" width={100} height={100} /></div>
+               <div className="absolute top-10 left-18"><Image src="/money.svg" alt="Money Image" width={100} height={100} /></div>
+               <div className="absolute bottom-8 right-36"><Image src="/money.svg" alt="Money Image" width={100} height={100} /></div>
+               <div className="absolute bottom-24 left-40"><Image src="/money.svg" alt="Money Image" width={100} height={100} /></div>
             </div>
          </section>
          <section id="about" ref={(el) => { sectionRefs.current["about"] = el; }} className={`pt-[88px] px-6 container mx-auto max-w-[1200px] scroll-mt-20 transition-all duration-1000 ${visibleSections.includes("about") ? "opacity-100" : "opacity-0"}`}>

@@ -8,7 +8,7 @@ export default function NotFound() {
          <div className="flex flex-col items-center gap-8 text-center max-w-[600px]">
             <Logo />
             <div className="flex flex-col gap-4">
-               <h1 className="text-[120px] md:text-[180px] font-bold text-main text-green-200 leading-none">404!</h1>
+               <h1 className="text-[120px] md:text-[180px] font-bold text-green-200 leading-none">404!</h1>
                <h2 className="text-h2 font-bold text-black">Page Not Found</h2>
                <p className="text-body text-brown">The page you&apos;re looking for doesn&apos;t exist or has been moved. Let&apos;s get you back on track!</p>
             </div>
