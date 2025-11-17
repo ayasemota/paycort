@@ -4,7 +4,7 @@ import Logo from "./components/Logo";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center bg-white px-4">
+    <div className="min-h-dvh w-full flex flex-col items-center justify-center bg-white px-4">
       <div className="flex flex-col items-center gap-6 sm:gap-8 text-center max-w-[600px]">
         <div className="scale-75 sm:scale-100">
           <Logo />
