@@ -22,11 +22,13 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="py-6 px-8 flex items-center justify-between sticky top-0 bg-white/75 backdrop-blur-3xl border-b border-green-100/30 z-50 shadow-sm">
-      <Link href="/">
-        <Logo />
-      </Link>
-      <div className="hidden lg:flex gap-10">
+    <nav className="py-4 sm:py-6 px-4 sm:px-8 flex items-center justify-between sticky top-0 bg-white/75 backdrop-blur-3xl border-b border-green-100/30 z-50 shadow-sm">
+      <div className="scale-75 sm:scale-100 origin-left">
+        <Link href="/">
+          <Logo />
+        </Link>
+      </div>
+      <div className="hidden lg:flex gap-6 xl:gap-10 text-sm xl:text-base">
         <Link
           href="/"
           className="hover:text-green-200 transition-colors duration-300"
@@ -48,7 +50,7 @@ export default function Navbar() {
           How it Works
         </a>
       </div>
-      <div className="flex gap-6">
+      <div>
         {/* <Link href="/onboarding?mode=signup" className="hidden sm:flex">
           <Button text="Sign Up" border={true} />
         </Link>
@@ -58,7 +60,7 @@ export default function Navbar() {
         <a
           href="#waitlist"
           onClick={(e) => scrollToSection(e, "waitlist")}
-          className="hover:text-green-200 transition-colors duration-300 cursor-pointer"
+          className="hover:text-green-200 transition-colors duration-300 cursor-pointer scale-75 sm:scale-100 origin-right"
         >
           <Button text="Join The Waitlist" />
         </a>
