@@ -164,14 +164,14 @@ export default function LandingPage() {
             </span>{" "}
             You.
           </h1>
-          <p className="text-sm sm:text-base lg:max-w-[40%] animate-fadeInUp stagger-1">
+          <p className="text-sm sm:text-base max-w-[75vw] lg:max-w-[40%] animate-fadeInUp stagger-1">
             A smart AI tool that helps Nigerians see, track, and plan their
             taxes in real time powered by clarity, not confusion.
           </p>
           <div className="w-full animate-fadeInUp stagger-2">
             <Button text="Join The Waitlist" onClick={scrollToWaitlist} />
           </div>
-        </div>
+      </div>
         <div className="hidden lg:block">
           <div className="absolute top-22 right-24">
             <Image src="/money.svg" alt="Money Image" width={70} height={70} />
