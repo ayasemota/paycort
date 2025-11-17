@@ -158,7 +158,7 @@ export default function LandingPage() {
         <div className="absolute inset-0 bg-linear-to-b from-transparent to-white/10"></div>
         <div className="container px-4 sm:px-6 py-12 sm:py-16 flex flex-col gap-4 sm:gap-6 lg:items-center lg:text-center lg:justify-center relative z-10">
           <h1 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[52px] lg:max-w-[70%] animate-fadeInUp leading-tight">
-            Understand Your Taxes. Before They{" "}
+            Understand Your Taxes Before They{" "}
             <span className="text-green-100 font-(family-name:--font-play-fair-display) italic">
               Understand
             </span>{" "}
@@ -213,7 +213,7 @@ export default function LandingPage() {
               visibleSections.includes("about") ? "animate-slideInRight" : ""
             }`}
           >
-            <h2 className="text-[24px] sm:text-[30px] lg:text-[130px] text-black lg:text-[#E2F3EA] font-bold lg:absolute lg:bottom-0 lg:right-0 text-center lg:text-left leading-tight px-4 sm:px-0">
+            <h2 className="text-[24px] sm:text-[30px] lg:text-[130px] text-black lg:text-[#E2F3EA] font-bold lg:absolute lg:-bottom-8 lg:right-0 text-center lg:text-left leading-tight px-4 sm:px-0">
               ABOUT US
             </h2>
             <div className="grid gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-[82px] text-sm sm:text-base">
