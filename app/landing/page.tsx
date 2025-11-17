@@ -147,7 +147,7 @@ export default function LandingPage() {
     <>
       <Navbar />
       <section
-        className="mx-auto min-h-[600px] flex flex-col items-center justify-center relative overflow-hidden"
+        className="mx-auto min-h-[500px] sm:min-h-[600px] flex flex-col items-center justify-center relative overflow-hidden"
         style={{
           backgroundImage: "url(/banner-bg.png)",
           backgroundSize: "cover",
@@ -156,15 +156,15 @@ export default function LandingPage() {
         }}
       >
         <div className="absolute inset-0 bg-linear-to-b from-transparent to-white/10"></div>
-        <div className="container px-6 py-16 flex flex-col gap-6 lg:items-center lg:text-center lg:justify-center relative z-10">
-          <h1 className="text-[36px] md:text-[52px] lg:max-w-[70%] animate-fadeInUp">
+        <div className="container px-4 sm:px-6 py-12 sm:py-16 flex flex-col gap-4 sm:gap-6 lg:items-center lg:text-center lg:justify-center relative z-10">
+          <h1 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[52px] lg:max-w-[70%] animate-fadeInUp leading-tight">
             Understand Your Taxes. Before They{" "}
             <span className="text-green-100 font-(family-name:--font-play-fair-display) italic">
               Understand
             </span>{" "}
             You.
           </h1>
-          <p className="lg:max-w-[40%] animate-fadeInUp stagger-1">
+          <p className="text-sm sm:text-base lg:max-w-[40%] animate-fadeInUp stagger-1">
             A smart AI tool that helps Nigerians see, track, and plan their
             taxes in real time powered by clarity, not confusion.
           </p>
@@ -192,11 +192,11 @@ export default function LandingPage() {
         ref={(el) => {
           sectionRefs.current["about"] = el;
         }}
-        className={`pt-[88px] px-6 container mx-auto max-w-[1200px] scroll-mt-20 transition-all duration-1000 ${
+        className={`pt-[60px] sm:pt-[88px] px-4 sm:px-6 container mx-auto max-w-[1200px] scroll-mt-20 transition-all duration-1000 ${
           visibleSections.includes("about") ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="flex flex-col lg:flex-row gap-7">
+        <div className="flex flex-col lg:flex-row gap-5 sm:gap-7">
           <div
             className={`hidden lg:flex transition-all duration-1000 ${
               visibleSections.includes("about") ? "animate-slideInLeft" : ""
@@ -209,14 +209,14 @@ export default function LandingPage() {
             />
           </div>
           <div
-            className={`bg-[#EDFFF5] rounded-lg overflow-hidden flex-1 lg:relative py-8 lg:py-0 transition-all duration-1000 ${
+            className={`bg-[#EDFFF5] rounded-lg overflow-hidden flex-1 lg:relative py-6 sm:py-8 lg:py-0 transition-all duration-1000 ${
               visibleSections.includes("about") ? "animate-slideInRight" : ""
             }`}
           >
-            <h2 className="text-[30px] lg:text-[130px] text-black lg:text-[#E2F3EA] font-bold lg:absolute lg:bottom-0 lg:right-0 text-center lg:text-left leading-24">
+            <h2 className="text-[24px] sm:text-[30px] lg:text-[130px] text-black lg:text-[#E2F3EA] font-bold lg:absolute lg:bottom-0 lg:right-0 text-center lg:text-left leading-tight px-4 sm:px-0">
               ABOUT US
             </h2>
-            <div className="grid gap-8 p-4 lg:p-[82px]">
+            <div className="grid gap-4 sm:gap-6 lg:gap-8 p-4 sm:p-6 lg:p-[82px] text-sm sm:text-base">
               {aboutTexts.map((text, index) => (
                 <p
                   key={index}
@@ -237,21 +237,21 @@ export default function LandingPage() {
         ref={(el) => {
           sectionRefs.current["works"] = el;
         }}
-        className={`pt-[88px] scroll-mt-20 transition-all duration-1000 ${
+        className={`pt-[60px] sm:pt-[88px] scroll-mt-20 transition-all duration-1000 ${
           visibleSections.includes("works") ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="py-10 px-6 bg-[#EDFFF5]">
+        <div className="py-8 sm:py-10 px-4 sm:px-6 bg-[#EDFFF5]">
           <div className="container mx-auto max-w-[1200px]">
             <h2
-              className={`text-[32px] md:text-[42px] font-semibold text-center mb-4 transition-all duration-800 ${
+              className={`text-[28px] sm:text-[32px] md:text-[42px] font-semibold text-center mb-3 sm:mb-4 transition-all duration-800 ${
                 visibleSections.includes("works") ? "animate-fadeInUp" : ""
               }`}
             >
               How It Works
             </h2>
             <p
-              className={`text-center text-gray-600 mb-12 max-w-[600px] mx-auto transition-all duration-800 ${
+              className={`text-center text-gray-600 mb-8 sm:mb-12 max-w-[600px] mx-auto transition-all duration-800 text-sm sm:text-base px-4 ${
                 visibleSections.includes("works")
                   ? "animate-fadeInUp stagger-1"
                   : ""
@@ -260,24 +260,24 @@ export default function LandingPage() {
               Getting started with Paycort is simple. Follow these three easy
               steps to take control of your taxes.
             </p>
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
               {howItWorksSteps.map((item, index) => (
                 <div
                   key={index}
-                  className={`bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-green-100/20 group ${
+                  className={`bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 border border-green-100/20 group ${
                     visibleSections.includes("works")
                       ? "animate-scaleIn"
                       : "opacity-0"
                   }`}
                   style={{ animationDelay: `${index * 0.15}s` }}
                 >
-                  <div className="text-[48px] font-bold text-green-200/20 group-hover:text-green-200/40 transition-colors duration-300 mb-4">
+                  <div className="text-[40px] sm:text-[48px] font-bold text-green-200/20 group-hover:text-green-200/40 transition-colors duration-300 mb-3 sm:mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-[22px] font-semibold mb-4 text-black group-hover:text-green-200 transition-colors duration-300">
+                  <h3 className="text-[18px] sm:text-[22px] font-semibold mb-3 sm:mb-4 text-black group-hover:text-green-200 transition-colors duration-300">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
                     {item.description}
                   </p>
                 </div>
@@ -291,29 +291,31 @@ export default function LandingPage() {
         ref={(el) => {
           sectionRefs.current["waitlist"] = el;
         }}
-        className={`py-[88px] px-6 container mx-auto flex items-center justify-center scroll-mt-20 transition-all duration-1000 ${
+        className={`py-[60px] sm:py-[88px] px-4 sm:px-6 container mx-auto flex items-center justify-center scroll-mt-20 transition-all duration-1000 ${
           visibleSections.includes("waitlist")
             ? "opacity-100 animate-fadeInUp"
             : "opacity-0"
         }`}
       >
-        <div className="max-w-[1200px] w-full bg-[#C8E6D7] rounded-2xl p-8 md:p-16 hover:shadow-xl transition-shadow duration-300">
-          <h1 className="text-[32px] md:text-[42px] mb-12">
+        <div className="max-w-[1200px] w-full bg-[#C8E6D7] rounded-2xl p-6 sm:p-8 md:p-16 hover:shadow-xl transition-shadow duration-300">
+          <h1 className="text-[28px] sm:text-[32px] md:text-[42px] mb-8 sm:mb-12">
             Join the <span className="text-green-100">Waitlist</span> now!
           </h1>
           <form
             onSubmit={handleSubmit}
-            className="grid w-full md:grid-cols-2 gap-8"
+            className="grid sm:grid-cols-2 gap-6 sm:gap-8"
           >
             {inputFields.map((field, index) => (
               <div
                 key={field.name}
-                className={`flex flex-col gap-3 ${
+                className={`flex flex-col gap-2 sm:gap-3 ${
                   visibleSections.includes("waitlist") ? "animate-fadeInUp" : ""
                 }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <label className="font-medium text-black">{field.label}</label>
+                <label className="font-medium text-black text-sm sm:text-base">
+                  {field.label}
+                </label>
                 <input
                   type={field.type}
                   name={field.name}
@@ -322,12 +324,12 @@ export default function LandingPage() {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="py-4 px-6 rounded-lg border-2 border-green-100 focus:outline-none focus:border-green-200 bg-white focus:scale-[1.02] transition-all duration-300 max-w-[90%] sm:max-w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="py-3 sm:py-4 px-4 sm:px-6 rounded-lg border-2 border-green-100 focus:outline-none focus:border-green-200 bg-white focus:scale-[1.02] transition-all duration-300 w-full disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                 />
               </div>
             ))}
             <div
-              className={`md:col-span-2 mt-4 ${
+              className={`sm:col-span-2 mt-2 sm:mt-4 ${
                 visibleSections.includes("waitlist")
                   ? "animate-fadeInUp stagger-4"
                   : ""
