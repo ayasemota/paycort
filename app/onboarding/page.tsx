@@ -1,10 +1,9 @@
 "use client";
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 import Modal from "../components/Modal";
 import Button from "../components/Button";
+import Logo from "../components/Logo";
 
 type FormField = { name: string; label: string; type: string };
 type FormData = { name: string; email: string; password: string };
@@ -61,8 +60,11 @@ function OnboardingContent() {
 
   return (
     <>
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-[#EDFFF5]">
+      <section className="min-h-dvh flex items-center justify-center px-6 py-10 bg-[#EDFFF5]">
         <div className="max-w-[480px] w-full bg-white rounded-2xl shadow-lg border border-green-50 p-8 md:p-12 text-center flex flex-col items-center">
+          <div className="pb-5">
+            <Logo />
+          </div>
           <h1 className="text-[28px] md:text-[24px] font-semibold mb-2">
             {modeText.title}
           </h1>
@@ -133,17 +135,15 @@ function OnboardingContent() {
 export default function OnboardingPage() {
   return (
     <>
-      <Navbar />
       <Suspense
         fallback={
-          <div className="min-h-[600px] flex items-center justify-center bg-[#EDFFF5]">
+          <div className="min-h-dvh flex items-center justify-center bg-[#EDFFF5]">
             <p>Loading...</p>
           </div>
         }
       >
         <OnboardingContent />
       </Suspense>
-      <Footer />
     </>
   );
 }
