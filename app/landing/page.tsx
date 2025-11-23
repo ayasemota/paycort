@@ -156,7 +156,7 @@ export default function LandingPage() {
         }}
       >
         <div className="absolute inset-0 bg-linear-to-b from-transparent to-white/10"></div>
-        <div className="container px-4 sm:px-6 py-12 sm:py-16 flex flex-col gap-4 sm:gap-6 lg:items-center lg:text-center lg:justify-center relative z-10">
+        <div className="container px-4 sm:px-6 py-12 sm:py-16 flex flex-col gap-4 sm:gap-6 items-center text-center justify-center relative z-10">
           <h1 className="text-[28px] sm:text-[36px] md:text-[48px] lg:text-[52px] lg:max-w-[70%] animate-fadeInUp leading-tight">
             Understand Your Taxes Before They{" "}
             <span className="text-green-100 font-(family-name:--font-play-fair-display) italic">

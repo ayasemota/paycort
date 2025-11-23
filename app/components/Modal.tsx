@@ -65,7 +65,7 @@ export default function Modal({
         </p>
         <button
           onClick={onClose}
-          className={`py-2 sm:py-3 px-6 sm:px-8 rounded-lg text-white hover:scale-105 transition-all duration-300 w-full font-medium shadow-md hover:shadow-lg text-sm sm:text-base ${
+          className={`py-2 cursor-pointer sm:py-3 px-6 sm:px-8 rounded-lg text-white hover:scale-105 transition-all duration-300 w-full font-medium shadow-md hover:shadow-lg text-sm sm:text-base ${
             type === "success"
               ? "bg-green-200 hover:bg-green-100"
               : "bg-red-500 hover:bg-red-600"
