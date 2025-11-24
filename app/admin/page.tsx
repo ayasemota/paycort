@@ -101,7 +101,7 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-black text-white">
       <div className="fixed top-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-b border-white/10 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center justify-center gap-4">
               <Image
                 src="/logo.png"
@@ -111,7 +111,7 @@ export default function AdminDashboard() {
               />
               <p className="font-bold text-2xl text-white">PAYCORT</p>
             </div>
-            <div className="hidden sm:block">
+            <div>
               <p className="text-sm font-medium text-green-200">
                 Admin Dashboard
               </p>
@@ -249,10 +249,6 @@ export default function AdminDashboard() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-green-200 to-green-100 flex items-center justify-center text-white font-bold text-sm">
-                              {entry.firstName[0]}
-                              {entry.lastName[0]}
-                            </div>
                             <p className="font-medium">
                               {entry.firstName} {entry.lastName}
                             </p>
@@ -264,7 +260,7 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 text-sm text-gray-300">
                           {entry.phone}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-400">
+                        <td className="text-sm text-gray-400">
                           {entry.createdAt
                             ?.toDate()
                             .toLocaleDateString("en-US", {
@@ -291,7 +287,7 @@ export default function AdminDashboard() {
               sortedEntries.map((entry, index) => (
                 <div
                   key={entry.id}
-                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300"
+                  className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden"
                 >
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-200 to-green-100 flex items-center justify-center text-white font-bold">
