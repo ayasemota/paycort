@@ -1,9 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { db } from "../lib/firebase";
-import Preloader from "../components/preloader";
-import Logo from "../components/Logo";
+import { db } from "../../lib/firebase";
+import Preloader from "../../components/preloader";
 import Image from "next/image";
 
 type WaitlistEntry = {
@@ -22,6 +21,20 @@ export default function AdminDashboard() {
   const [filterDate, setFilterDate] = useState("all");
   const [sortNewestFirst, setSortNewestFirst] = useState(true);
   const [viewMode, setViewMode] = useState<"grid" | "table">("table");
+
+    useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setViewMode("grid");
+      } else {
+        setViewMode("table");
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const q = query(
@@ -100,7 +113,7 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-black text-white">
       <div className="fixed top-0 left-0 right-0 bg-black/40 backdrop-blur-xl border-b border-white/10 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 gap-4 flex items-center justify-between">
           <div className="flex flex-wrap items-center gap-4">
             <div className="flex items-center justify-center gap-4">
               <Image
@@ -118,13 +131,13 @@ export default function AdminDashboard() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="hidden sm:flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg">
+            <div className="flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
               <span className="text-sm">Live</span>
             </div>
             <button
               onClick={exportToCSV}
-              className="px-4 py-2 bg-green-200 hover:bg-green-100 rounded-lg font-medium transition-all duration-300 text-sm"
+              className="hidden md:flex px-4 py-2 bg-green-200 hover:bg-green-100 rounded-lg font-medium transition-all duration-300 text-sm"
             >
               Export CSV
             </button>
@@ -132,7 +145,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="pt-24 pb-8 px-4 sm:px-6 max-w-7xl mx-auto">
+      <div className="pt-34 sm:pt-24 pb-8 px-4 sm:px-6 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
@@ -187,33 +200,11 @@ export default function AdminDashboard() {
             >
               {sortNewestFirst ? "↓ Newest" : "↑ Oldest"}
             </button>
-            <div className="flex gap-2">
-              <button
-                onClick={() => setViewMode("table")}
-                className={`px-4 py-3 rounded-xl transition-all duration-300 ${
-                  viewMode === "table"
-                    ? "bg-green-200 text-white"
-                    : "bg-white/10 border border-white/20 hover:bg-white/20"
-                }`}
-              >
-                📋
-              </button>
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`px-4 py-3 rounded-xl transition-all duration-300 ${
-                  viewMode === "grid"
-                    ? "bg-green-200 text-white"
-                    : "bg-white/10 border border-white/20 hover:bg-white/20"
-                }`}
-              >
-                ▦
-              </button>
-            </div>
           </div>
         </div>
 
-        {viewMode === "table" ? (
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden">
+        {viewMode === "table" && (
+          <div className="hidden lg:block bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead className="bg-white/5 border-b border-white/10">
@@ -260,7 +251,7 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 text-sm text-gray-300">
                           {entry.phone}
                         </td>
-                        <td className="text-sm w-full pr-2 text-gray-400">
+                        <td className="text-sm text-gray-400">
                           {entry.createdAt
                             ?.toDate()
                             .toLocaleDateString("en-US", {
@@ -277,8 +268,10 @@ export default function AdminDashboard() {
               </table>
             </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        )}
+
+        {viewMode === "grid" && (
+          <div className="grid lg:hidden grid-cols-1 md:grid-cols-2 gap-4">
             {sortedEntries.length === 0 ? (
               <div className="col-span-full text-center text-gray-400 py-12">
                 No entries found
