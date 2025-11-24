@@ -106,8 +106,8 @@ export default function AdminDashboard() {
               <Image
                 src="/logo.png"
                 alt="Company Logo"
-                width={150}
-                height={50}
+                width={40}
+                height={40}
               />
               <p className="font-bold text-2xl text-white">PAYCORT</p>
             </div>
@@ -260,7 +260,7 @@ export default function AdminDashboard() {
                         <td className="px-6 py-4 text-sm text-gray-300">
                           {entry.phone}
                         </td>
-                        <td className="text-sm text-gray-400">
+                        <td className="text-sm w-full pr-2 text-gray-400">
                           {entry.createdAt
                             ?.toDate()
                             .toLocaleDateString("en-US", {
