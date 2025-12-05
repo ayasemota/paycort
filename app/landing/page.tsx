@@ -74,7 +74,7 @@ export default function LandingPage() {
         showModal(
           "success",
           "Welcome Aboard! 🎉",
-          "You've successfully joined our waitlist. We'll notify you as soon as we launch!"
+          "You've successfully joined our waitlist. We'll notify you when we launch!"
         );
         setFormData({ firstName: "", lastName: "", phone: "", email: "" });
       } else {
