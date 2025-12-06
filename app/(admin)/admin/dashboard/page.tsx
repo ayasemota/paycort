@@ -22,6 +22,7 @@ export default function AdminDashboard() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterDate, setFilterDate] = useState("all");
   const [sortNewestFirst, setSortNewestFirst] = useState(true);
+  const [displayCount, setDisplayCount] = useState(20);
   const router = useRouter();
 
   useEffect(() => {
@@ -49,6 +50,7 @@ export default function AdminDashboard() {
         console.error("Firebase error:", error);
         setIsOnline(false);
         setLoading(false);
+        setEntries([]);
       }
     );
 
@@ -73,9 +75,11 @@ export default function AdminDashboard() {
     const matchesSearch =
       entry.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       entry.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      entry.email.toLowerCase().includes(searchTerm.toLowerCase());
+      entry.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      entry.phone.toLowerCase().includes(searchTerm.toLowerCase());
     if (filterDate === "all") return matchesSearch;
-    const entryDate = entry.createdAt?.toDate();
+    const timestamp = entry.createdAt as { toDate?: () => Date };
+    const entryDate = timestamp?.toDate?.();
     const today = new Date();
     if (filterDate === "today")
       return (
@@ -83,7 +87,7 @@ export default function AdminDashboard() {
       );
     if (filterDate === "week") {
       const weekAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
-      return entryDate >= weekAgo && matchesSearch;
+      return entryDate && entryDate >= weekAgo && matchesSearch;
     }
     return matchesSearch;
   });
@@ -91,6 +95,25 @@ export default function AdminDashboard() {
   const sortedEntries = sortNewestFirst
     ? filteredEntries
     : [...filteredEntries].reverse();
+
+  const displayedEntries = sortedEntries.slice(0, displayCount);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 500
+      ) {
+        setDisplayCount((prev) => Math.min(prev + 20, sortedEntries.length));
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [sortedEntries.length]);
+
+  useEffect(() => {
+    setDisplayCount(20);
+  }, [searchTerm, filterDate, sortNewestFirst]);
 
   const exportToCSV = () => {
     const headers = [
@@ -118,13 +141,17 @@ export default function AdminDashboard() {
     a.click();
   };
 
-  const todayCount = entries.filter(
-    (e) => e.createdAt?.toDate().toDateString() === new Date().toDateString()
-  ).length;
-  const weekCount = entries.filter(
-    (e) =>
-      e.createdAt?.toDate() >= new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-  ).length;
+  const todayCount = entries.filter((e) => {
+    const date = e.createdAt as { toDate?: () => Date };
+    return date?.toDate?.()?.toDateString() === new Date().toDateString();
+  }).length;
+  const weekCount = entries.filter((e) => {
+    const date = e.createdAt as { toDate?: () => Date };
+    const entryDate = date?.toDate?.();
+    return (
+      entryDate && entryDate >= new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
+    );
+  }).length;
 
   if (loading) return <Preloader />;
 
@@ -206,7 +233,7 @@ export default function AdminDashboard() {
           <div className="flex flex-col lg:flex-row gap-4">
             <input
               type="text"
-              placeholder="Search by name or email..."
+              placeholder="Search by name, email, or phone..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="flex-1 px-4 py-3 bg-white/10 border border-white/20 rounded-xl focus:bg-white/20 focus:border-green-400 focus:outline-none transition-all duration-300 placeholder-gray-400"
@@ -235,81 +262,16 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div className="hidden lg:block bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-white/5 border-b border-white/10">
-                <tr>
-                  {["#", "Name", "Email", "Phone", "Date"].map((header) => (
-                    <th
-                      key={header}
-                      className="px-6 py-4 text-left text-sm font-semibold text-gray-300"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-white/10">
-                {sortedEntries.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan={5}
-                      className="px-6 py-12 text-center text-gray-400"
-                    >
-                      <p className="text-lg">No entries found</p>
-                    </td>
-                  </tr>
-                ) : (
-                  sortedEntries.map((entry, index) => (
-                    <tr
-                      key={entry.id}
-                      className="hover:bg-white/5 transition-all duration-200"
-                    >
-                      <td className="px-6 py-4 text-sm text-gray-400">
-                        {index + 1}
-                      </td>
-                      <td className="px-6 py-4">
-                        <div className="flex items-center gap-3">
-                          <p className="font-medium">
-                            {entry.firstName} {entry.lastName}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-300">
-                        {entry.email}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-300">
-                        {entry.phone}
-                      </td>
-                      <td className="px-6 py-4 text-sm text-gray-400">
-                        {entry.createdAt
-                          ?.toDate()
-                          .toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                            hour: "2-digit",
-                            minute: "2-digit",
-                          }) || "N/A"}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div className="grid lg:hidden grid-cols-1 md:grid-cols-2 gap-4">
-          {sortedEntries.length === 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center justify-center">
+          {displayedEntries.length === 0 ? (
             <div className="col-span-full text-center text-gray-400 py-12">
               No entries found
             </div>
           ) : (
-            sortedEntries.map((entry, index) => (
+            displayedEntries.map((entry, index) => (
               <div
                 key={entry.id}
-                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden"
+                className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/15 transition-all duration-300 overflow-hidden hover:scale-[1.02] hover:border-green-400"
               >
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-gradient-to-br from-green-200 to-green-100 flex items-center justify-center text-white font-bold">
@@ -328,14 +290,20 @@ export default function AdminDashboard() {
                   <p className="text-gray-300">📱 {entry.phone}</p>
                   <p className="text-gray-400 text-xs">
                     🕐{" "}
-                    {entry.createdAt
-                      ?.toDate()
-                      .toLocaleDateString("en-US", {
-                        month: "short",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      }) || "N/A"}
+                    {(() => {
+                      const timestamp = entry.createdAt as {
+                        toDate?: () => Date;
+                      };
+                      const date = timestamp?.toDate?.();
+                      return date
+                        ? date.toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          })
+                        : "N/A";
+                    })()}
                   </p>
                 </div>
               </div>
@@ -344,7 +312,14 @@ export default function AdminDashboard() {
         </div>
 
         <div className="mt-6 text-center text-gray-400 text-sm">
-          Showing {sortedEntries.length} of {entries.length} entries
+          Showing {displayedEntries.length} of {sortedEntries.length} entries{" "}
+          {sortedEntries.length !== entries.length &&
+            `(${entries.length} total)`}
+          {displayedEntries.length < sortedEntries.length && (
+            <span className="block mt-2 text-green-400">
+              Scroll down to load more...
+            </span>
+          )}
         </div>
       </div>
     </div>

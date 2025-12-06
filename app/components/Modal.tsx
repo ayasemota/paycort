@@ -4,6 +4,7 @@ interface ModalProps {
   title: string;
   message: string;
   type?: "success" | "error";
+  showCommunityButton?: boolean;
 }
 
 export default function Modal({
@@ -12,8 +13,17 @@ export default function Modal({
   title,
   message,
   type = "success",
+  showCommunityButton = false,
 }: ModalProps) {
   if (!isOpen) return null;
+
+  const handleCommunityClick = () => {
+    window.open(
+      "https://whatsapp.com/channel/0029VbC2LpS3wtbBJ8KiMq0a",
+      "_blank"
+    );
+    setTimeout(() => onClose(), 500);
+  };
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-9999 px-4 animate-fadeInUp backdrop-blur-sm">
@@ -63,16 +73,25 @@ export default function Modal({
         <p className="text-black mb-4 sm:mb-6 text-center text-sm sm:text-base">
           {message}
         </p>
-        <button
-          onClick={onClose}
-          className={`py-2 cursor-pointer sm:py-3 px-6 sm:px-8 rounded-lg text-white hover:scale-105 transition-all duration-300 w-full font-medium shadow-md hover:shadow-lg text-sm sm:text-base ${
-            type === "success"
-              ? "bg-green-200 hover:bg-green-100"
-              : "bg-red-500 hover:bg-red-600"
-          }`}
-        >
-          Close
-        </button>
+        {showCommunityButton && type === "success" ? (
+          <button
+            onClick={handleCommunityClick}
+            className="py-2 cursor-pointer sm:py-3 px-6 sm:px-8 rounded-lg text-white hover:scale-105 transition-all duration-300 w-full font-medium shadow-md hover:shadow-lg text-sm sm:text-base bg-green-200 hover:bg-green-100"
+          >
+            Join Our Community 🚀
+          </button>
+        ) : (
+          <button
+            onClick={onClose}
+            className={`py-2 cursor-pointer sm:py-3 px-6 sm:px-8 rounded-lg text-white hover:scale-105 transition-all duration-300 w-full font-medium shadow-md hover:shadow-lg text-sm sm:text-base ${
+              type === "success"
+                ? "bg-green-200 hover:bg-green-100"
+                : "bg-red-500 hover:bg-red-600"
+            }`}
+          >
+            Close
+          </button>
+        )}
       </div>
     </div>
   );

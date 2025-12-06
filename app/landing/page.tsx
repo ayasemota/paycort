@@ -22,6 +22,8 @@ export default function LandingPage() {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showJoinCommunity, setShowJoinCommunity] = useState(false);
+  const [hasTimedOut, setHasTimedOut] = useState(false);
   const [visibleSections, setVisibleSections] = useState<string[]>([]);
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({});
 
@@ -57,10 +59,28 @@ export default function LandingPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (hasTimedOut) {
+      showModal(
+        "error",
+        "Request Already Timed Out",
+        "Your previous request timed out. Please refresh the page and try again."
+      );
+      return;
+    }
     setIsSubmitting(true);
+    const timeout = setTimeout(() => {
+      showModal(
+        "error",
+        "Request Timeout",
+        "The request took too long. Please check your connection and try again."
+      );
+      setIsSubmitting(false);
+      setHasTimedOut(true);
+    }, 30000);
     try {
       const emailExists = await waitlistService.checkEmail(formData.email);
       if (emailExists) {
+        clearTimeout(timeout);
         showModal(
           "error",
           "Already Registered",
@@ -70,6 +90,7 @@ export default function LandingPage() {
         return;
       }
       const result = await waitlistService.add(formData);
+      clearTimeout(timeout);
       if (result.success) {
         showModal(
           "success",
@@ -77,6 +98,7 @@ export default function LandingPage() {
           "You've successfully joined our waitlist. We'll notify you when we launch!"
         );
         setFormData({ firstName: "", lastName: "", phone: "", email: "" });
+        setShowJoinCommunity(true);
       } else {
         showModal(
           "error",
@@ -85,6 +107,7 @@ export default function LandingPage() {
         );
       }
     } catch (error) {
+      clearTimeout(timeout);
       showModal(
         "error",
         "Connection Error",
@@ -171,7 +194,7 @@ export default function LandingPage() {
           <div className="w-full animate-fadeInUp stagger-2">
             <Button text="Join The Waitlist" onClick={scrollToWaitlist} />
           </div>
-      </div>
+        </div>
         <div className="hidden lg:block">
           <div className="absolute top-22 right-24">
             <Image src="/money.svg" alt="Money Image" width={70} height={70} />
@@ -350,6 +373,7 @@ export default function LandingPage() {
         title={modalState.title}
         message={modalState.message}
         type={modalState.type}
+        showCommunityButton={showJoinCommunity}
       />
     </>
   );
