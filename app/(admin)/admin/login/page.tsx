@@ -83,7 +83,7 @@ export default function AdminLogin() {
               <input
                 key={index}
                 ref={inputRefs[index]}
-                type="text"
+                type="password"
                 inputMode="numeric"
                 maxLength={1}
                 value={digit}
