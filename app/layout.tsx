@@ -9,6 +9,20 @@ const playfair = Playfair_Display({ variable: "--font-play-fair-display", subset
 export const metadata: Metadata = {
   title: "Paycort | AI Tax Integration App",
   description: "Built with Love by AY Asemota",
+    openGraph: {
+    title: "Paycort | AI Tax Integration App",
+    description: "Built with Love by AY Asemota",
+    siteName: "Paycort",
+    images: [
+      {
+        url: "/social-preview.png",
+        width: 1200,
+        height: 630,
+        alt: "Paycort Website Preview",
+      },
+    ],
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
